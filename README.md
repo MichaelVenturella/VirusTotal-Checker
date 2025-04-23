@@ -7,7 +7,6 @@ VirusTotal Checker is a Python-based command-line tool that scans Indicators of 
 ## Features
 - Supports domains, IP addresses, and hashes (MD5, SHA1, SHA256).
 - Command-line interface with flexible input/output options.
-- ASCII art title for a user-friendly experience.
 - Verbose logging for debugging.
 - Output results to a JSON file for further analysis.
 - Respects VirusTotal's API rate limits (4 requests/minute for free accounts).
