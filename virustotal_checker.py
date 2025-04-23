@@ -1,3 +1,4 @@
+```python
 import requests
 import json
 import time
@@ -5,6 +6,7 @@ import argparse
 import logging
 from typing import Dict, List
 from uuid import uuid4
+from tqdm import tqdm  # Added for progress bar
 
 class VirusTotalChecker:
     def __init__(self, api_key: str, verbose: bool = False):
@@ -78,10 +80,13 @@ class VirusTotalChecker:
             "total_scans": sum(last_analysis_stats.values()),
         }
 
-    def scan_iocs(self, iocs: List[str]) -> List[Dict]:
+    def scan_iocs(self, iocs: List[str], show_stats: bool = False) -> List[Dict]:
         """Scan a list of IOCs and return their ratings."""
         results = []
-        for ioc in iocs:
+        # Use tqdm for progress bar if show_stats is True
+        ioc_iterator = tqdm(iocs, desc="Scanning IOCs", unit="ioc") if show_stats else iocs
+        
+        for ioc in ioc_iterator:
             ioc = ioc.strip()
             if not ioc:
                 continue
@@ -125,6 +130,7 @@ def main():
     parser.add_argument("-f", "--file", help="Input file with IOCs (one per line)")
     parser.add_argument("-o", "--output", help="Output file to save results (JSON format)")
     parser.add_argument("-v", "--verbose", action="store_true", help="Enable verbose logging")
+    parser.add_argument("-stats", action="store_true", help="Show scanning progress stats")
     
     args = parser.parse_args()
 
@@ -154,8 +160,8 @@ def main():
             "invalid_ioc"
         ]
 
-    # Scan IOCs
-    results = scanner.scan_iocs(iocs)
+    # Scan IOCs with stats option
+    results = scanner.scan_iocs(iocs, show_stats=args.stats)
 
     # Print results
     for result in results:
@@ -181,3 +187,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+```
