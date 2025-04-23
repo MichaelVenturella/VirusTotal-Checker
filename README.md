@@ -37,6 +37,7 @@ python virustotal_checker.py -k <api_key> [-f <input_file>] [-o <output_file>] [
 - `-f, --file` (optional): Path to a text file containing IOCs (one per line).
 - `-o, --output` (optional): Path to save results in JSON format.
 - `-v, --verbose` (optional): Enable verbose logging for detailed execution info.
+- `-stats` (optional): Provides a real-time progress update until completion of script execution
 
 If no input file (`-f`) is provided, the script uses a default list of IOCs:
 - `example.com` (domain)
