@@ -1,4 +1,3 @@
-```python
 import requests
 import json
 import time
@@ -187,4 +186,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-```
